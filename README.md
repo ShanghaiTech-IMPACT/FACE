@@ -2,7 +2,7 @@
 
 by [Wei Jia](https://github.com/WeiJiaFiona)\,[Han Wu](https://hanwu.website/)\,  Lanzhuju Mei, Jiamin Woo, Minjiao Wang<sup>+</sup> and [Zhiming Cui](https://shanghaitech-impact.github.io/)<sup>+</sup>
 
-[[Project Page](https://github.com/hahahajiawei/FACE_Fully-automated-Condylar-remodeling-Evaluation.git)]
+[[Project Page](https://github.com/WeiJiaFiona/JoD_Fully_Automated_Condylar_Remodeling_Evaluation.git)]
 
 
 
