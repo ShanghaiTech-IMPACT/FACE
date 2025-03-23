@@ -1,18 +1,18 @@
 ## Welcome to the **FACE**: **F**ully-**A**utomated **C**ondylar Remodeling **E**valuation ! ;-)
 
-by [Wei Jia](https://github.com/WeiJiaFiona)\,[Han Wu](https://hanwu.website/)\,  Lanzhuju Mei, Jiamin Woo, Minjiao Wang<sup>+</sup> and [Zhiming Cui](https://shanghaitech-impact.github.io/)<sup>+</sup>
+by [Wei Jia](https://github.com/WeiJiaFiona)\, [Han Wu](https://hanwu.website/)\,  Lanzhuju Mei, Jiamin Woo, Minjiao Wang<sup>+</sup> and [Zhiming Cui](https://shanghaitech-impact.github.io/)<sup>+</sup>
 
 [[Project Page](https://github.com/WeiJiaFiona/JoD_Fully_Automated_Condylar_Remodeling_Evaluation.git)]
 
 
 
-#### 1. What is condylar remodeling ?
+#### 1. What is condylar remodeling?
 * Forces applied during and after orthognathic surgery can induce changes in the condyle's morphology, position, and function, i.e. condylar remodeling.
 * Several systematic reviews have emphasized that condylar change should be considered a critical indicator for surgery prognosis. 
 * This evaluation is critical for understanding the impact of orthognathic surgery on the TMJ, thereby guiding follow-up care.
 
 #### 2. How to perform condylar remodeling evaluation?
-* **Maunal mathod**
+* **Manual method**
   * acquire images during pre- and post-operative phases
   * segmenting and registering condyles manually
     * observer-variant interpretation for condyle
@@ -29,16 +29,16 @@ by [Wei Jia](https://github.com/WeiJiaFiona)\,[Han Wu](https://hanwu.website/)\,
   * segmenting and registering condyles from images using V-Net and landmarks.
   * overall evaluations
     * qualitative assessment
-      * heapmap : [blue, red] → [resorption, hyperplasia]
+      * heatmap : [blue, red] → [resorption, hyperplasia]
       * registration mesh : [blue, yellow] → [T0, T1]
     * quantitative assessment
-      * Δ D : local pair points distance change with T0 as reference
-      * Δ V : volume change with T0 as reference   
+      * Δ D: local pair points distance change with T0 as reference
+      * Δ V: volume change with T0 as reference   
 
 
 
 
-#### 3. To implement evaluation method 
+#### 3. To implement the evaluation of our method 
 
 
 * **Getting Started**
@@ -63,7 +63,7 @@ cd code
     │   ├── T2_img.nii.gz
     ├── ...
     └── evaluation
-        ├── heapmap
+        ├── heatmap
         ├── distance_changes.json
         └──volume_changes.json
    ```
@@ -93,11 +93,11 @@ cd code
     python evaluation\volume_change.py
     ```
 
-* **Evaluation process and resolts**
-  * the data generated during evaluation is saved to ```code\data\{ID}```
-  * the evaluation results is in file ```code\data\evaluation```
+* **Evaluation process and results**
+  * The data generated during evaluation is saved to ```code\data\{ID}```
+  * The evaluation results are in the file ```code\data\evaluation```
 
-#### 3. Some results on test set
+#### 3. Some visualization results on the test set
 
 ![comparison](figs\comparison.png "comparison table")
 
