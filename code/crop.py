@@ -1,16 +1,16 @@
-from skimage.measure import label, regionprops  # 导入skimage库的label和regionprops,用于标签和连通区域分析
-import json  # 导入json模块,用于处理JSON文件
-from tqdm import tqdm  # 导入tqdm模块,用于进度条显示
-import pandas as pd  # 导入pandas用于数据操作
-import numpy as np  # 导入numpy用于数组和矩阵操作
-import os  # 导入os用于操作文件和目录
-import torch  # 导入PyTorch库用于深度学习
-from glob import glob  # 导入glob用于查找符合特定模式的文件路径名
-import torchio as tio  # 导入torchio用于医学图像的处理
-from sympy import symbols, solve, Symbol  # 导入sympy库用于符号计算,解方程
-from pymeshlab import Mesh, MeshSet  # 导入Mesh和MeshSet,用于加载和操作3D网格
-import trimesh  # 导入trimesh用于3D网格的加载和操作
-import argparse  # 导入argparse用于命令行参数解析
+from skimage.measure import label, regionprops  
+import json  
+from tqdm import tqdm 
+import pandas as pd 
+import numpy as np  
+import os 
+import torch  
+from glob import glob 
+import torchio as tio 
+from sympy import symbols, solve, Symbol  
+from pymeshlab import Mesh, MeshSet 
+import trimesh 
+import argparse  
 from skimage.measure import label, regionprops, marching_cubes
 
 def voxel2mesh(tio_img, mesh_path,smooth_iters=5):
@@ -38,13 +38,13 @@ def save_mesh(verts, faces, path, invert_faces=False):
     输出:
         无
     """
-    mesh = Mesh(verts, faces)  # 创建网格对象
-    ms = MeshSet()  # 创建MeshSet对象,容纳一个或多个网格
-    ms.add_mesh(mesh)  # 将创建的网格添加到MeshSet
+    mesh = Mesh(verts, faces) 
+    ms = MeshSet()  
+    ms.add_mesh(mesh) 
     if invert_faces:
-        ms.invert_faces_orientation()  # 如果设置了反转面朝向,则反转网格面的朝向
+        ms.invert_faces_orientation() 
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    ms.save_current_mesh(path)  # 将网格保存为指定路径
+    ms.save_current_mesh(path) 
 
 
 
