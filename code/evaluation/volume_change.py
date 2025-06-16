@@ -7,19 +7,15 @@ import json
 
 def load_nifti(file_path):
     img = nib.load(file_path)
-    data = img.get_fdata()  # 获取体素数据
-    spacing = img.header.get_zooms()  # 获取spacing信息
+    data = img.get_fdata()  
+    spacing = img.header.get_zooms()  
     return data, spacing
 
 # 计算体积
 def calculate_volume(data, spacing):
-    # 找出label=1的体素s
     label_voxels = (data == 1)
-    # 计算体素数量
     voxel_count = np.sum(label_voxels)
-    # 计算每个体素的体积
     voxel_volume = np.prod(spacing)
-    # 计算总的体积
     volume = voxel_count * voxel_volume
     return volume
 
