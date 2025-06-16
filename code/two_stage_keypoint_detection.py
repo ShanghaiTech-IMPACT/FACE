@@ -87,7 +87,7 @@ def crop_3d_centroid_move(img, centroid, patch_size):
     
     return pad_img
 
-# 好的，你需要将这个这个经过预处理后的，已经转换成target size和target spacing的图像保存为nii.gz文件，以确保img的坐标系和预测出来的关键点的坐标系是对应的
+
 def keypoint_detection(path1, path2, img_path, out_path, normalize=(0, 2500)):
     
     # stage 1 for plane points
@@ -99,17 +99,11 @@ def keypoint_detection(path1, path2, img_path, out_path, normalize=(0, 2500)):
     # load data of stage 1
     start = time.time()
     img = tio.ScalarImage(img_path)
-
-    # target_spacing指定了目标图像的空间分辨率（即每个像素或体素的物理尺寸）
     target_spacing = np.array([0.48883, 0.48883, 1.])
     ori_size = np.array(img.data.shape[1:])
-    # target_size是根据原始图像的尺寸和原始图像的空间分辨率（img.spacing）
-    # 以及目标分辨率（target_spacing）计算的目标图像尺寸。该操作确保目标图像在不同分辨率下保持一致的物理尺寸。
+    
     target_size = (ori_size * np.array(img.spacing) / target_spacing).astype(int)
-    # img.data.unsqueeze(0)是将图像数据的维度从(C, H, W, D)转为(1, C, H, W, D)，即为图像增加一个“批次”维度。
-    img_int = F.interpolate(img.data.unsqueeze(0).float(), size=(256, 256, 128), mode='trilinear').float()
-    # mode='trilinear'表示采用三线性插值方法来调整图像的大小。这种插值方法在三维图像中比较常用。
-    # 使用torch.clamp函数对图像数据进行裁剪。normalize[0]和normalize[1]是标准化的最小值和最大值。此步骤确保图像值处于预定范围内。通常这是为了避免异常值的影响。
+    img_int = F.interpolate(img.data.unsqueeze(0).float(), size=(256, 256, 128), mode='trilinear').float(
     img_int_clamp = torch.clamp(img_int, normalize[0], normalize[1])
     img_int_norm = (img_int_clamp - img_int_clamp.min()) / (img_int_clamp.max() - img_int_clamp.min())
     
@@ -121,8 +115,6 @@ def keypoint_detection(path1, path2, img_path, out_path, normalize=(0, 2500)):
         pred = model(img_int_norm.cuda()) # (1, 8, target_size)
 
     stage1_centroid = {}
-
-    # 关键点的预测是在target size和target spacing下进行的
 
     pred_data = F.interpolate(pred.cpu(), size=tuple(int(x) for x in target_size), mode='trilinear').squeeze().numpy()
     pred_Or = pred_data[0] + pred_data[1]
